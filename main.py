@@ -136,7 +136,7 @@ def Convolution(args, I, kernel):
     for c in range(I_pad.shape[2]):
         for n in range(I_out.shape[0]):
             for m in range(I_out.shape[1]):
-
+                pass
                 # Please fill in I_out
 
     #### Your job 1.1 ends here: convolution ####
@@ -269,7 +269,7 @@ def DFT(args, I):
     for c in range(I.shape[2]):
         for u in range(I.shape[0]):
             for v in range(I.shape[1]):
-
+                pass
                 # Please fill in I_out_real and I_out_imaginary
 
     #### Your job 2 ends here: DFT ####
