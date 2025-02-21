@@ -133,12 +133,11 @@ def Convolution(args, I, kernel):
     #### Your job 1.0 ends here: zero padding (just read the code) ####
 
     #### Your job 1.1 starts here: convolution (you may add just one more line without for loops; the fewer foor loops you have; the faster the code runs) ####
+    np.set_printoptions(threshold=np.inf)
     for c in range(I_pad.shape[2]):
         for n in range(I_out.shape[0]):
             for m in range(I_out.shape[1]):
-                pass
-                # Please fill in I_out
-
+                I_out[n][m][c] =  np.multiply(I_pad[n:n+kernel.shape[0], m:m+kernel.shape[1], c], kernel).sum()
     #### Your job 1.1 ends here: convolution ####
 
     ## Display the convolution output image I_out
