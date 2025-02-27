@@ -8,7 +8,6 @@ import matplotlib.image as mpimg
 from mpl_toolkits.mplot3d import Axes3D
 import matplotlib as mpl
 
-
 def data_loader(args):
     """
     Output:
@@ -77,23 +76,27 @@ def load_kernel(args):
 
     elif args.kernel == "binomial":
         #### Your job 3.1 starts here: implement the 9-by-9 2D binomial filter (see textbook/lecture slides for details) ####
-        kernel = np.zeros((9, 9)) # this is a placeholder, and you can remove this line completely
-
+        tmp = np.ndarray((9, 1), buffer=np.array([1, 8, 28, 56, 70, 56, 28, 8, 1]), dtype=int)
+        kernel = np.matmul(tmp, tmp.transpose())
         kernel = kernel / np.sum(kernel) # keep this line to make your filter properly normalized
         #### Your job 3.1 ends here: implement the 9-by-9 2D binomial filter ####
 
     elif args.kernel == "Laplacian":
         #### Your job 3.2 starts here: implement the 3-by-3 2D Laplacian filter (see textbook/lecture slides for details) ####
-        kernel = np.zeros((3, 3))  # this is a placeholder, and you can remove this line completely
-
+        kernel = np.array([[0, 1, 0],[1, -4, 1],[0, 1, 0]])
+        print(kernel)
         #### Your job 3.2 ends here: implement the 3-by-3 2D Laplacian filter ####
 
     elif args.kernel == "your_denoising_kernel":
         #### Your job 3.3 starts here: implement a 2D denoising filter on your own ####
-        kernel = np.zeros((3, 3))  # this is a placeholder, and you can remove this line completely
-
+        # wasn't entirely sure how to tackle this. A linear or box filter would "work", but not well. We already
+        #implemented a binomial filter but the size is unnecessarily large so I am going to go with another binomial filter
+        tmp = np.ndarray((3, 1), buffer=np.array([1, 2, 1]), dtype=int)
+        kernel = np.matmul(tmp, tmp.transpose())
         kernel = kernel / np.sum(kernel)  # keep this line to make your filter properly normalized
         #### Your job 3.3 ends here: implement a 2D denoising filter on your own ####
+    else:
+        raise ValueError(args.kernel+ " is not a valid kernel argument")
 
     ## Dispaly the kernel
     fig, ax = plt.subplots()
