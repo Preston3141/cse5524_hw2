@@ -264,11 +264,13 @@ def DFT(args, I):
     M = I.shape[1]
 
     #### Your job 2 starts here: DFT (you may add just 5~10 more line without for loops; the fewer foor loops you have; the faster the code runs) ####
-
     for c in range(I.shape[2]):
         for u in range(I.shape[0]):
             for v in range(I.shape[1]):
-                pass
+                real_func = lambda n, m, c  : np.cos(-2*np.pi * (u*n/N + v*m/M)  )
+                imaginary_func = lambda n, m, c  :np.sin(-2*np.pi * (u*n/N + v*m/M)  )
+                I_out_real[u][v][c] = np.multiply(I, np.fromfunction(real_func, I.shape, dtype=float)).sum() 
+                I_out_imaginary[u][v][c] = np.multiply(I, np.fromfunction(imaginary_func, I.shape, dtype=float)).sum() 
                 # Please fill in I_out_real and I_out_imaginary
 
     #### Your job 2 ends here: DFT ####
