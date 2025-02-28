@@ -405,6 +405,18 @@ def Recover_function(args, I, u_target_freq, v_target_freq):
 
     #### Your implementation starts here (your solution cannot exceed 20 lines) ####
     I_out = np.zeros(I.shape) # this is a placeholder, and you can remove this line completely
+    (amp, phase) = DFT(args, I)
+    print(amp.shape)
+    for c in range(amp.shape[2]):
+        for u in range(amp.shape[0]):
+            for v in range(amp.shape[1]):
+                if(amp[u][v][c] != 0):
+                    print("u: "+ str(u) +",\tv: " + str(v) + ",\tvalue: " + str(amp[u][v][c]))
+                if(amp[u][v][c] != 0 and (u!= u_target_freq and v != v_target_freq) ):
+                    amp[u][v][c] = 0
+                if (phase[u][v][c] != 0 and (u!= u_target_freq and v != v_target_freq) ):
+                    phase[u][v][c] = 0
+    I_out = IDFT(args, amp, phase)
     
     #### Your implementation ends here ####
 
